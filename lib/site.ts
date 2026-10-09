@@ -1,47 +1,66 @@
 // Central place for clinic details and page content.
-// Replace the placeholder values below with the clinic's real information.
+
+const address = {
+  street: "170-56 Cedar Craft Road",
+  city: "Jamaica",
+  state: "New York",
+  stateCode: "NY",
+  zip: "11432",
+};
+
+const fullAddress = `${address.street}, ${address.city}, ${address.stateCode} ${address.zip}`;
 
 export const site = {
-  name: "S Clinic",
-  tagline: "Family medicine with American heart",
+  name: "Pro Health Family Medicine",
+  shortName: "Pro Health",
+  tagline: "Family Medicine in Queens, New York",
   description:
-    "S Clinic provides primary care, urgent care, pediatrics, women's health and telehealth for families across the community.",
-  phone: "(555) 123-4567",
-  phoneHref: "tel:+15551234567",
-  email: "care@sclinic.com",
-  address: {
-    street: "1776 Liberty Avenue, Suite 200",
-    city: "Philadelphia",
-    state: "PA",
-    zip: "19106",
-  },
+    "Pro Health Family Medicine provides primary care, urgent care, telehealth, physicals, vaccinations and lab services in Jamaica, Queens.",
+  phone: "347-868-5055",
+  phoneHref: "tel:+13478685055",
+  email: "ProHealthNY1@gmail.com",
+  address,
+  fullAddress,
+  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}`,
+  mapEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}&output=embed`,
+  // TODO: confirm the clinic's real opening hours.
   hours: [
-    { days: "Monday – Friday", time: "8:00 AM – 7:00 PM" },
-    { days: "Saturday", time: "9:00 AM – 3:00 PM" },
+    { days: "Monday – Friday", time: "9:00 AM – 6:00 PM" },
+    { days: "Saturday", time: "10:00 AM – 2:00 PM" },
     { days: "Sunday", time: "Closed" },
   ],
-  // Link to your EHR's patient portal (e.g. athenahealth, eClinicalWorks, MyChart).
-  portalUrl: "https://example.com/patient-portal",
-  youtubeChannel: "https://www.youtube.com/@sclinic",
-  social: {
-    facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
-    youtube: "https://www.youtube.com/@sclinic",
-  },
+  // TODO: replace with the clinic's Facebook page and Google Business reviews links.
+  facebookUrl: "https://www.facebook.com/",
+  googleReviewsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Pro Health Family Medicine ${fullAddress}`)}`,
 };
 
 export const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/services", label: "Our Services" },
+  { href: "/telehealth", label: "Telehealth" },
   { href: "/videos", label: "Videos" },
-  { href: "/offers", label: "Offers" },
   { href: "/contact", label: "Contact Us" },
 ] as const;
 
+export const doctor = {
+  name: "Dr. Mohammad S. Hossain, MD",
+  shortName: "Dr. Hossain",
+  title: "Board-Certified Family Medicine Physician",
+  initials: "MH",
+  // Add a photo at public/images/dr-hossain.jpg and set this to "/images/dr-hossain.jpg".
+  photo: null as string | null,
+  bio: "Dr. Hossain is a highly experienced physician with many years of practice, specializing in a wide range of medical conditions. He is known for providing exceptional, compassionate, and patient-focused care. His dedication to his patients and commitment to quality healthcare truly set him apart.",
+  credentials: [
+    { label: "Medical Degree", text: "Shir e Bangla Medical College, Bangladesh" },
+    { label: "Residency", text: "Latrobe Area Hospital, Pennsylvania" },
+    { label: "Board Certification", text: "American Board of Family Medicine" },
+    { label: "Academic Appointment", text: "Clinical Assistant Professor, Geisinger Commonwealth School of Medicine" },
+  ],
+};
+
 export type IconName =
   | "stethoscope"
-  | "baby"
+  | "clipboard"
   | "heart"
   | "bolt"
   | "video"
@@ -53,251 +72,114 @@ export type IconName =
   | "users"
   | "star";
 
-export const services: {
+export type Service = {
   slug: string;
   image: string;
   title: string;
   icon: IconName;
   summary: string;
   details: string[];
-}[] = [
+  featured: boolean;
+};
+
+export const services: Service[] = [
   {
     slug: "primary-care",
     image: "/images/svc-primary.jpg",
     title: "Primary Care",
     icon: "stethoscope",
-    summary:
-      "Annual physicals, preventive screenings and a doctor who knows your history.",
+    summary: "Annual check-ups, preventive screenings and a doctor who knows your history.",
     details: ["Annual wellness exams", "Preventive screenings", "Referrals & care coordination"],
+    featured: true,
   },
   {
     slug: "urgent-care",
     image: "/images/svc-urgent.jpg",
     title: "Urgent Care",
     icon: "bolt",
-    summary:
-      "Same-day visits for colds, flu, minor injuries, sprains and infections — no appointment needed.",
-    details: ["Walk-ins welcome", "Minor injuries & stitches", "On-site X-ray"],
-  },
-  {
-    slug: "pediatrics",
-    image: "/images/svc-pediatrics.jpg",
-    title: "Pediatrics",
-    icon: "baby",
-    summary:
-      "Well-child visits, school and sports physicals, and gentle care from newborn to teen.",
-    details: ["Well-child checkups", "School & sports physicals", "Childhood immunizations"],
-  },
-  {
-    slug: "womens-health",
-    image: "/images/svc-womens.jpg",
-    title: "Women's Health",
-    icon: "heart",
-    summary:
-      "Routine gynecological exams, family planning and support through every stage of life.",
-    details: ["Well-woman exams", "Family planning", "Menopause care"],
+    summary: "Same-day visits for colds, flu, minor injuries, sprains and infections.",
+    details: ["Same-day appointments", "Minor injuries & infections", "Cold, flu & fever"],
+    featured: true,
   },
   {
     slug: "telehealth",
     image: "/images/svc-telehealth.jpg",
     title: "Telehealth",
     icon: "video",
-    summary:
-      "See a provider from home by secure video — ideal for follow-ups and minor concerns.",
-    details: ["Secure video visits", "E-prescriptions", "Evening availability"],
+    summary: "See Dr. Hossain from home by secure video — ideal for follow-ups and minor concerns.",
+    details: ["Secure video visits", "E-prescriptions", "Follow-up care"],
+    featured: true,
   },
   {
     slug: "vaccinations",
     image: "/images/svc-vaccines.jpg",
     title: "Vaccinations",
     icon: "syringe",
-    summary:
-      "Flu shots, travel vaccines and routine immunizations for adults and children.",
-    details: ["Seasonal flu shots", "Travel vaccines", "Adult boosters"],
+    summary: "Flu shots and routine immunizations to keep you and your family protected.",
+    details: ["Seasonal flu shots", "Routine immunizations", "Adult boosters"],
+    featured: true,
   },
   {
     slug: "lab-diagnostics",
     image: "/images/svc-lab.jpg",
     title: "Lab & Diagnostics",
     icon: "flask",
-    summary:
-      "On-site blood work and diagnostic testing with fast, clearly explained results.",
-    details: ["On-site blood draws", "Rapid tests", "Results in your patient portal"],
-  },
-  {
-    slug: "chronic-care",
-    image: "/images/svc-chronic.jpg",
-    title: "Chronic Care",
-    icon: "pulse",
-    summary:
-      "Ongoing management for diabetes, high blood pressure, asthma and heart health.",
-    details: ["Diabetes management", "Blood pressure control", "Personal care plans"],
-  },
-];
-
-export const offers: {
-  title: string;
-  price: string;
-  priceNote: string;
-  description: string;
-  includes: string[];
-  code: string;
-  featured?: boolean;
-}[] = [
-  {
-    title: "New Patient Welcome",
-    price: "$49",
-    priceNote: "first visit",
-    description: "A complete first visit for self-pay patients new to S Clinic.",
-    includes: ["Full health history review", "Vital signs & physical exam", "Personal care plan"],
-    code: "WELCOME49",
-  },
-  {
-    title: "Annual Physical",
-    price: "$99",
-    priceNote: "self-pay",
-    description: "Our most popular package — a yearly checkup with basic lab work.",
-    includes: ["Comprehensive physical exam", "Basic metabolic lab panel", "Cholesterol screening"],
-    code: "PHYSICAL99",
+    summary: "Blood work and diagnostic testing with results clearly explained.",
+    details: ["Blood draws", "Rapid tests", "Clear explanation of results"],
     featured: true,
   },
   {
-    title: "Heroes Discount",
-    price: "15%",
-    priceNote: "off every visit",
-    description: "Thank you to our veterans, active-duty military and first responders.",
-    includes: ["Applies to all self-pay services", "Covers spouse & dependents", "Valid ID required"],
-    code: "HEROES15",
+    slug: "chronic-health",
+    image: "/images/svc-chronic.jpg",
+    title: "Chronic Health",
+    icon: "pulse",
+    summary: "Ongoing management for diabetes, high blood pressure, asthma and heart health.",
+    details: ["Diabetes management", "Blood pressure control", "Personal care plans"],
+    featured: true,
   },
   {
-    title: "Back-to-School Physical",
-    price: "$35",
-    priceNote: "per child",
-    description: "School and sports physicals with forms completed on the spot.",
-    includes: ["Sports & school forms", "Vision & hearing check", "Immunization review"],
-    code: "SCHOOL35",
-  },
-  {
-    title: "Family Flu Shots",
-    price: "$0",
-    priceNote: "with most insurance",
-    description: "Protect the whole household this season. Walk-ins welcome.",
-    includes: ["All ages 6 months+", "No appointment needed", "$25 self-pay per shot"],
-    code: "FLUFREE",
-  },
-  {
-    title: "Telehealth Visit",
-    price: "$39",
-    priceNote: "per visit",
-    description: "Talk with a provider from home for minor illness and follow-ups.",
-    includes: ["Secure video call", "E-prescription if needed", "Visit summary emailed"],
-    code: "TELE39",
+    slug: "physical-examinations",
+    image: "/images/svc-physicals.jpg",
+    title: "Physical Examinations",
+    icon: "clipboard",
+    summary: "Fast, thorough physicals with forms completed in the office.",
+    details: ["CDL Physicals", "TLC Physicals", "Immigration Physicals", "Sports Physicals", "School Physicals"],
+    featured: false,
   },
 ];
 
-// Replace each `youtubeId` with the ID from your own YouTube video URL:
-// https://www.youtube.com/watch?v=<youtubeId>
+// Facebook videos: add the link of each public video from the clinic's Facebook page,
+// e.g. "https://www.facebook.com/<page>/videos/1234567890/".
 export const videos: {
-  youtubeId: string;
+  facebookUrl: string;
   title: string;
   description: string;
-  category: string;
-  duration: string;
-}[] = [
-  {
-    youtubeId: "REPLACE_ID_1",
-    title: "Welcome to S Clinic",
-    description: "Take a quick tour of our clinic and meet the team who will care for you.",
-    category: "Clinic Tour",
-    duration: "3:12",
-  },
-  {
-    youtubeId: "REPLACE_ID_2",
-    title: "What to Expect at Your Annual Physical",
-    description: "Dr. Carter walks through each step of a yearly checkup.",
-    category: "Patient Guides",
-    duration: "5:40",
-  },
-  {
-    youtubeId: "REPLACE_ID_3",
-    title: "Flu Season: Myths vs. Facts",
-    description: "Common questions about the flu shot, answered by our nursing staff.",
-    category: "Health Tips",
-    duration: "4:05",
-  },
-  {
-    youtubeId: "REPLACE_ID_4",
-    title: "How to Join a Telehealth Visit",
-    description: "A step-by-step guide to connecting with your provider from home.",
-    category: "Patient Guides",
-    duration: "2:48",
-  },
-  {
-    youtubeId: "REPLACE_ID_5",
-    title: "Managing Blood Pressure at Home",
-    description: "Simple daily habits that make a real difference for heart health.",
-    category: "Health Tips",
-    duration: "6:21",
-  },
-  {
-    youtubeId: "REPLACE_ID_6",
-    title: "Preparing Your Child for a Checkup",
-    description: "Tips from our pediatric team to make visits stress-free for kids.",
-    category: "Pediatrics",
-    duration: "3:57",
-  },
+}[] = [];
+
+export const insurers: { name: string; logo?: string }[] = [
+  // Drop official logo files into public/insurance/ and set `logo`, e.g. logo: "/insurance/aetna.png".
+  { name: "EmblemHealth" },
+  { name: "Fidelis Care" },
+  { name: "Healthfirst" },
+  { name: "Aetna" },
+  { name: "Anthem Blue Cross Blue Shield" },
+  { name: "Medicaid" },
+  { name: "Medicare" },
 ];
 
-export const team = [
+export const reviews = [
   {
-    name: "Dr. Emily Carter, MD",
-    role: "Medical Director · Family Medicine",
-    bio: "Board-certified family physician with 18 years of experience caring for families.",
-    initials: "EC",
-    image: "/images/team-carter.jpg",
+    name: "Rezaul Haque",
+    quote:
+      "Amazing doctor. He, in all instances, pays serious attention to my description of problems. Carefully probe into the conditions for diagnostic. He's an extremely nice, friendly and caring person. I am very lucky to have him as my physician. I'm confident that anyone seen by him will keep visiting his office for proper treatment and exceptional friendliness.",
   },
   {
-    name: "Dr. James Whitfield, DO",
-    role: "Urgent Care & Internal Medicine",
-    bio: "U.S. Army veteran who has served patients in field hospitals and community clinics.",
-    initials: "JW",
-    image: "/images/team-whitfield.jpg",
+    name: "Dave Jimenez",
+    quote:
+      "I had my first appointment with Dr. Hossain today, and I couldn’t be happier with my experience! I recently moved from Florida about a month ago, and Dr. Hossain made me feel very comfortable right away. He was extremely friendly, caring, and took the time to listen and understand my diagnosis. I truly appreciate the compassion and attention he showed me. I’m very happy to have found such a great doctor!",
   },
   {
-    name: "Dr. Maria Alvarez, MD",
-    role: "Pediatrics",
-    bio: "Fluent in English and Spanish, Dr. Alvarez has cared for children for over a decade.",
-    initials: "MA",
-    image: "/images/team-alvarez.jpg",
-  },
-  {
-    name: "Daniel Brooks, NP",
-    role: "Family Nurse Practitioner",
-    bio: "Focused on preventive care, sports medicine and helping patients feel heard at every visit.",
-    initials: "DB",
-    image: "/images/team-brooks.jpg",
+    name: "Sharika Rodoshi",
+    quote: "Amazing doctor!",
   },
 ];
-
-export const testimonials = [
-  {
-    quote:
-      "The staff treated my family like neighbors. We were seen the same day and left with a clear plan.",
-    name: "Michael R.",
-    detail: "Patient since 2019",
-  },
-  {
-    quote:
-      "Telehealth visits have been a lifesaver with three kids. Quick, friendly and professional.",
-    name: "Jessica T.",
-    detail: "Mom of three",
-  },
-  {
-    quote:
-      "As a veteran, I appreciate the respect and care I get here. Best clinic in town.",
-    name: "Robert K.",
-    detail: "U.S. Navy Veteran",
-  },
-];
-
-export const insurers = ["Medicare", "Medicaid", "Aetna", "Blue Cross", "Cigna", "UnitedHealthcare", "Humana", "TRICARE"];

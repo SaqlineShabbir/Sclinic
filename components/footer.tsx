@@ -11,22 +11,17 @@ export function Footer() {
         <div>
           <Link href="/" className="flex items-center gap-3">
             <Logo className="size-10" />
-            <span className="font-display text-xl font-bold text-white">{site.name}</span>
+            <span className="font-display text-xl font-bold leading-tight text-white">{site.name}</span>
           </Link>
           <p className="mt-4 text-sm leading-relaxed">{site.description}</p>
-          <div className="mt-5 flex gap-3">
-            {Object.entries(site.social).map(([name, href]) => (
-              <a
-                key={name}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold capitalize hover:border-white hover:text-white"
-              >
-                {name}
-              </a>
-            ))}
-          </div>
+          <a
+            href={site.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-block rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold hover:border-white hover:text-white"
+          >
+            Follow us on Facebook
+          </a>
         </div>
 
         <div>
@@ -45,7 +40,7 @@ export function Footer() {
         <div>
           <h2 className="font-display text-lg font-semibold text-white">Services</h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {services.slice(0, 6).map((s) => (
+            {services.map((s) => (
               <li key={s.slug}>
                 <Link href={`/services#${s.slug}`} className="hover:text-white">
                   {s.title}
@@ -64,6 +59,15 @@ export function Footer() {
                 {address.street}
                 <br />
                 {address.city}, {address.state} {address.zip}
+                <br />
+                <a
+                  href={site.directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block font-semibold text-white underline-offset-4 hover:underline"
+                >
+                  Get Directions →
+                </a>
               </span>
             </li>
             <li className="flex gap-3">

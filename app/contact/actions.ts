@@ -15,7 +15,6 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
     email: String(formData.get("email") ?? "").trim(),
     phone: String(formData.get("phone") ?? "").trim(),
     service: String(formData.get("service") ?? "").trim(),
-    offer: String(formData.get("offer") ?? "").trim(),
     message: String(formData.get("message") ?? "").trim(),
   };
 

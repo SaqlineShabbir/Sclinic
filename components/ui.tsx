@@ -105,7 +105,7 @@ export function CtaBand() {
           <Eyebrow light>Accepting new patients</Eyebrow>
           <h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">Ready to feel your best?</h2>
           <p className="mt-3 max-w-md text-white/80">
-            Book online or call us — most patients are seen the same day. Walk-ins are always welcome.
+            Request an appointment online or call us — in-office and telehealth visits available.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href="/contact">
@@ -131,10 +131,10 @@ export function CtaBand() {
 /** Row of trust signals shown on several pages. */
 export function TrustBadges() {
   const badges = [
-    { icon: "award", title: "Board-certified", text: "Physicians & NPs" },
-    { icon: "calendar", title: "Same-day visits", text: "Walk-ins welcome" },
-    { icon: "shield", title: "Most insurance", text: "Medicare & TRICARE" },
-    { icon: "users", title: "All ages", text: "Newborn to seniors" },
+    { icon: "award", title: "Board-certified", text: "Family medicine physician" },
+    { icon: "calendar", title: "Same-day visits", text: "When available" },
+    { icon: "shield", title: "Insurance accepted", text: "Medicare, Medicaid & more" },
+    { icon: "video", title: "Telehealth", text: "Visits from home" },
   ] as const;
   return (
     <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">

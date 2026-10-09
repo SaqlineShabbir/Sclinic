@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { PageHero } from "@/components/ui";
-import { offers, site } from "@/lib/site";
+import { site } from "@/lib/site";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
@@ -9,11 +9,8 @@ export const metadata: Metadata = {
   description: `Book an appointment or get in touch with ${site.name}.`,
 };
 
-export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
-  const { offer } = await searchParams;
-  const validOffer = offers.find((o) => o.code === offer)?.code;
+export default function ContactPage() {
   const { address } = site;
-  const mapQuery = encodeURIComponent(`${address.street}, ${address.city}, ${address.state} ${address.zip}`);
 
   return (
     <>
@@ -21,14 +18,14 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
         eyebrow="Contact Us"
         title="We're here to help"
         intro="Request an appointment, ask a question, or stop by — our friendly front desk team is ready for you."
-        image="/images/svc-womens.jpg"
+        image="/images/reception.jpg"
       />
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.6fr]">
         <aside className="space-y-6">
           <ContactCard icon="phone" title="Call us">
             <a href={site.phoneHref} className="text-lg font-bold text-flag-blue hover:text-flag-red">{site.phone}</a>
-            <p className="text-sm text-muted">Same-day appointments available</p>
+            <p className="text-sm text-muted">Call to book or ask a question</p>
           </ContactCard>
           <ContactCard icon="mail" title="Email us">
             <a href={`mailto:${site.email}`} className="break-all font-bold text-flag-blue hover:text-flag-red">{site.email}</a>
@@ -41,12 +38,12 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
               {address.city}, {address.state} {address.zip}
             </p>
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+              href={site.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-flag-red hover:underline"
+              className="mt-2 inline-flex items-center gap-2 rounded-full bg-flag-red px-4 py-2 text-sm font-bold text-white hover:bg-flag-red-dark"
             >
-              Get directions →
+              <Icon name="pin" className="size-4" /> Get Directions
             </a>
           </ContactCard>
           <ContactCard icon="clock" title="Hours">
@@ -66,7 +63,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
           <h2 className="font-display text-3xl font-bold text-flag-blue">Request an appointment</h2>
           <p className="mt-2 text-muted">Fill out the form and we&rsquo;ll call you to confirm a time.</p>
           <div className="mt-8">
-            <ContactForm offer={validOffer} />
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -74,8 +71,8 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
       <section aria-label="Map" className="border-t border-flag-blue/10">
         <iframe
           title={`Map of ${site.name}`}
-          src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-          className="h-96 w-full border-0 grayscale-[30%]"
+          src={site.mapEmbedUrl}
+          className="h-96 w-full border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />

@@ -36,11 +36,10 @@ const paths: Record<IconName | UiIcon, React.ReactNode> = {
       <circle cx="20" cy="11" r="2" />
     </>
   ),
-  baby: (
+  clipboard: (
     <>
-      <circle cx="12" cy="8" r="5" />
-      <path d="M10 8h.01M14 8h.01M10.5 10.5a2 2 0 0 0 3 0" />
-      <path d="M7 21v-2a5 5 0 0 1 10 0v2" />
+      <rect x="5" y="4" width="14" height="18" rx="2" />
+      <path d="M9 2h6v4H9zM9 12l2 2 4-4M9 18h6" />
     </>
   ),
   heart: <path d="M12 21s-7.5-4.6-9.3-9.2C1.4 8.4 3.6 5 7 5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8C19.5 16.4 12 21 12 21Z" />,
@@ -131,6 +130,17 @@ export function Logo({ className = "size-10" }: IconProps) {
       <path d="M16 9h8v7h7v8h-7v7h-8v-7H9v-8h7V9Z" fill="#fff" />
       <rect x="18" y="16" width="4" height="8" fill="#b22234" />
       <rect x="16" y="18" width="8" height="4" fill="#b22234" />
+    </svg>
+  );
+}
+
+export function GoogleLogo({ className = "size-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+      <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z" />
+      <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" />
+      <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z" />
+      <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z" />
     </svg>
   );
 }

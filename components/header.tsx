@@ -18,11 +18,11 @@ export function Header() {
           <p className="flex items-center gap-2">
             <span className="size-2 rounded-full bg-emerald-400" aria-hidden="true" />
             <span className="font-semibold">Accepting new patients</span>
-            <span className="hidden text-white/60 md:inline">· Mon–Fri 8am–7pm · Sat 9am–3pm</span>
+            <span className="hidden text-white/60 md:inline">· {site.address.city}, Queens</span>
           </p>
           <div className="flex items-center gap-5">
-            <a href={site.portalUrl} className="hidden items-center gap-1.5 hover:text-white sm:flex">
-              <Icon name="portal" className="size-4" /> Patient Portal
+            <a href={`mailto:${site.email}`} className="hidden items-center gap-1.5 hover:text-white md:flex">
+              <Icon name="mail" className="size-4" /> {site.email}
             </a>
             <a href={site.phoneHref} className="flex items-center gap-1.5 font-semibold hover:text-white">
               <Icon name="phone" className="size-4" />
@@ -38,8 +38,8 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
             <Logo className="size-10" />
             <span className="leading-tight">
-              <span className="block font-display text-xl font-extrabold text-flag-blue">{site.name}</span>
-              <span className="block text-xs font-medium text-muted">Family Medical Center</span>
+              <span className="block font-display text-xl font-extrabold text-flag-blue">{site.shortName}</span>
+              <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-flag-red">Family Medicine</span>
             </span>
           </Link>
 

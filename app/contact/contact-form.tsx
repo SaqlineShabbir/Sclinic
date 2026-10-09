@@ -10,7 +10,7 @@ const initialState: ContactState = { status: "idle", message: "" };
 const inputClass =
   "mt-2 w-full rounded-lg border border-flag-blue/20 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-muted/60 focus:border-flag-blue focus:ring-2 focus:ring-flag-blue/20 aria-invalid:border-flag-red aria-invalid:ring-flag-red/20";
 
-export function ContactForm({ offer }: { offer?: string }) {
+export function ContactForm() {
   const [state, formAction, pending] = useActionState(sendContactMessage, initialState);
   const errors = state.errors ?? {};
 
@@ -58,14 +58,7 @@ export function ContactForm({ offer }: { offer?: string }) {
           />
         </Field>
       </div>
-      {offer && <input type="hidden" name="offer" value={offer} />}
-
       <div className="flex flex-col gap-3 sm:col-span-2">
-        {offer && (
-          <p className="rounded-lg bg-flag-red-soft px-4 py-2 text-sm text-flag-red-dark">
-            Offer code <strong className="font-mono">{offer}</strong> will be applied to your request.
-          </p>
-        )}
         {state.status === "error" && (
           <p className="text-sm font-semibold text-flag-red" role="alert">{state.message}</p>
         )}
