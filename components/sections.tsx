@@ -83,7 +83,7 @@ export function InsuranceSection() {
             className="flex h-28 items-center justify-center rounded-2xl border border-line bg-white p-4 text-center shadow-sm"
           >
             {ins.logo ? (
-              <Image src={ins.logo} alt={ins.name} width={160} height={64} className="max-h-16 w-auto object-contain" />
+              <Image src={ins.logo} alt={ins.name} width={200} height={80} unoptimized className="h-auto w-full max-w-44" />
             ) : (
               <span className="flex flex-col items-center gap-2">
                 <Icon name="shield" className="size-6 text-flag-red" />

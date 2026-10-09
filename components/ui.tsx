@@ -102,8 +102,7 @@ export function CtaBand() {
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <div className="relative grid overflow-hidden rounded-3xl bg-flag-blue text-white md:grid-cols-[1.4fr_1fr]">
         <div className="relative z-10 p-8 sm:p-12">
-          <Eyebrow light>Accepting new patients</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">Ready to feel your best?</h2>
+          <h2 className="font-display text-3xl font-extrabold sm:text-4xl">Ready to feel your best?</h2>
           <p className="mt-3 max-w-md text-white/80">
             Request an appointment online or call us — in-office and telehealth visits available.
           </p>

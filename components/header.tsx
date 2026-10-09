@@ -15,12 +15,18 @@ export function Header() {
       {/* Utility bar */}
       <div className="bg-flag-blue-dark text-white/90 text-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
-          <p className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-emerald-400" aria-hidden="true" />
-            <span className="font-semibold">Accepting new patients</span>
-            <span className="hidden text-white/60 md:inline">· {site.address.city}, Queens</span>
-          </p>
-          <div className="flex items-center gap-5">
+          <a
+            href={site.directionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-w-0 items-center gap-1.5 hover:text-white"
+          >
+            <Icon name="pin" className="size-4 shrink-0" />
+            <span className="truncate">
+              {site.address.street}, {site.address.city}, {site.address.stateCode} {site.address.zip}
+            </span>
+          </a>
+          <div className="flex shrink-0 items-center gap-5">
             <a href={`mailto:${site.email}`} className="hidden items-center gap-1.5 hover:text-white md:flex">
               <Icon name="mail" className="size-4" /> {site.email}
             </a>

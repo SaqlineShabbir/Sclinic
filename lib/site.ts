@@ -1,7 +1,7 @@
 // Central place for clinic details and page content.
 
 const address = {
-  street: "170-56 Cedar Craft Road",
+  street: "170-56 Cedarcroft Road",
   city: "Jamaica",
   state: "New York",
   stateCode: "NY",
@@ -9,6 +9,9 @@ const address = {
 };
 
 const fullAddress = `${address.street}, ${address.city}, ${address.stateCode} ${address.zip}`;
+
+const googlePlaceName = "Pro-health Family Medicine PLLC- Dr. Mohammad Shakhawat Hossain MD";
+const geo = { lat: 40.7121081, lng: -73.7910026 };
 
 export const site = {
   name: "Pro Health Family Medicine",
@@ -21,17 +24,19 @@ export const site = {
   email: "ProHealthNY1@gmail.com",
   address,
   fullAddress,
-  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}`,
-  mapEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}&output=embed`,
+  // Exact pin of the clinic's Google Maps listing.
+  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${geo.lat},${geo.lng}`,
+  mapEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(googlePlaceName)}&ll=${geo.lat},${geo.lng}&z=17&output=embed`,
   // TODO: confirm the clinic's real opening hours.
   hours: [
     { days: "Monday – Friday", time: "9:00 AM – 6:00 PM" },
     { days: "Saturday", time: "10:00 AM – 2:00 PM" },
     { days: "Sunday", time: "Closed" },
   ],
-  // TODO: replace with the clinic's Facebook page and Google Business reviews links.
+  // TODO: replace with the clinic's Facebook page.
   facebookUrl: "https://www.facebook.com/",
-  googleReviewsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Pro Health Family Medicine ${fullAddress}`)}`,
+  // Google Maps listing (opens the clinic's profile with its reviews).
+  googleReviewsUrl: "https://maps.google.com/?cid=17971721632798258372",
 };
 
 export const navLinks = [
@@ -157,14 +162,14 @@ export const videos: {
 }[] = [];
 
 export const insurers: { name: string; logo?: string }[] = [
-  // Drop official logo files into public/insurance/ and set `logo`, e.g. logo: "/insurance/aetna.png".
-  { name: "EmblemHealth" },
-  { name: "Fidelis Care" },
-  { name: "Healthfirst" },
-  { name: "Aetna" },
-  { name: "Anthem Blue Cross Blue Shield" },
-  { name: "Medicaid" },
-  { name: "Medicare" },
+  // Demo logos — replace the files in public/insurance/ with the official logos.
+  { name: "EmblemHealth", logo: "/insurance/emblemhealth.svg" },
+  { name: "Fidelis Care", logo: "/insurance/fidelis-care.svg" },
+  { name: "Healthfirst", logo: "/insurance/healthfirst.svg" },
+  { name: "Aetna", logo: "/insurance/aetna.svg" },
+  { name: "Anthem Blue Cross Blue Shield", logo: "/insurance/anthem.svg" },
+  { name: "Medicaid", logo: "/insurance/medicaid.svg" },
+  { name: "Medicare", logo: "/insurance/medicare.svg" },
 ];
 
 export const reviews = [
